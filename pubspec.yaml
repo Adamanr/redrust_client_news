@@ -1,0 +1,73 @@
+name: GoodNews
+description: Приложение для чтения свежих новостей
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.5
+  path_provider:
+  dio:
+  permission_handler: ^9.2.0
+  sqflite:
+  path:
+
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - image/logo.jpg
+    - image/logo2.jpg
+    - image/logo3.jpg
+
+  fonts:
+    - family: Broadway-Neon
+      fonts:
+        - asset: fonts/Broadway-Neon.ttf
+    - family: Daray
+      fonts:
+        - asset: fonts/Daray.otf
+    - family: cunia
+      fonts:
+        - asset: fonts/cunia.otf
+    - family: Kunika
+      fonts:
+        - asset: fonts/Kunika.otf
+    - family: morganite
+      fonts:
+        - asset: fonts/morganite_bold.ttf
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto.ttf
+    - family: Roboto-Italic
+      fonts:
+        - asset: fonts/Roboto-Italic.ttf
+    - family: MultiroundPro
+      fonts:
+        - asset: fonts/MultiroundPro.otf
+    - family: gogono-cocoa-mochi-cyrillic
+      fonts:
+          - asset: fonts/gogono-cocoa-mochi-cyrillic.otf
+    - family: Proserpina-Deco
+      fonts:
+          - asset: fonts/Proserpina-Deco.ttf
+    - family: Los-Angeles-Deco
+      fonts:
+          - asset: fonts/Los-Angeles-Deco.ttf
+
