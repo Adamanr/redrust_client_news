@@ -1,15 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:GoodNews/src/ui/SelectPortal.dart';
-import 'package:file/memory.dart';
-import 'package:GoodNews/src/app.dart';
 import 'package:GoodNews/src/blocks/Navbar.dart';
 import 'package:GoodNews/src/models/reg_request.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:webfeed/webfeed.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -39,6 +35,7 @@ class _HomeWidget extends State<HomePage> {
     });
   }
 
+
   @override
   Widget build(BuildContext context){
     return WillPopScope(
@@ -60,7 +57,7 @@ class _HomeWidget extends State<HomePage> {
                       context,MaterialPageRoute(builder: (context) => SelectPortal())
                   ),
                 },
-                child: Text("Выберите новостной портал",
+                child: const Text("Выберите новостной портал",
                 style: TextStyle(
                   fontSize: 15,
                   fontFamily: 'cunia'
@@ -74,10 +71,26 @@ class _HomeWidget extends State<HomePage> {
                     )
                 ),
               ),
-            )
+            ),
+          ListView.builder(
+            itemCount: _feed.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                title: Text(_feed[index].title),
+                subtitle: Text(_feed[index].description),
+              );
+            },
+          )
           ],
         ),
       ),
     );
   }
 }
+
+Future<List<RssItem>> loadFeed() async {
+  var rssString = await http.get('https://feeds.feedburner.com/dartlang-news');
+  var rssFeed = RssFeed.parse(rssString.body);
+  return rssFeed.items;
+}
+

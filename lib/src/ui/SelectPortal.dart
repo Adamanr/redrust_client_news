@@ -11,7 +11,7 @@ class SelectPortal extends StatefulWidget {
 }
 
 class _SelectPortalWidget extends State<SelectPortal>{
-
+  var _containerColor = Colors.blue;
   @override
   Widget build(BuildContext context){
     return WillPopScope(
@@ -22,37 +22,131 @@ class _SelectPortalWidget extends State<SelectPortal>{
       ),
       drawer: NavBar(),
         body: ListView(
-          padding: const EdgeInsets.only(left: 10,right: 10),
+          padding: const EdgeInsets.all(5),
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 40,
-              child:InkWell(
-                splashColor: Colors.lightBlue, // splash color
-                onTap: () {}, // button pressed
-                child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                        margin: const EdgeInsets.only(left:10,right: 10),
-                        child: const Icon(Icons.call,size: 30,color: Colors.lightBlue,)
-                    ), // icon
-                    const Text(
-                        "Хабр",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontFamily: 'cunia'
-                      ),
-                    ), // text
-                  ],
+                height: 50,
+                decoration: BoxDecoration(
+                  color: _containerColor,
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
                 ),
-              )
+                child:InkWell(
+                  onLongPress: () {
+                    setState(() {
+                      _containerColor = Colors.red;
+                    });
+                  },
+                  onTap: (){
+                    if(_containerColor == Colors.red){
+                      setState(() {
+                        _containerColor = Colors.blue;
+                      });
+                    }
+                  },
+                  child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                          margin: const EdgeInsets.only(left:10,right: 10),
+                          child: const Icon(Icons.call,size: 30,color: Colors.white,)
+                      ), // icon
+                      const Text(
+                        "Хабр",
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontFamily: 'MultiroundPro'
+                        ),
+                      ), // text
+                    ],
+                  ),
+                )
             ),
-            ElevatedButton(onPressed: ()=>null, child: Text("a")),
-            ElevatedButton(onPressed: ()=>null, child: Text("a")),
-            ElevatedButton(onPressed: ()=>null, child: Text("a")),
-            ElevatedButton(onPressed: ()=>null, child: Text("a")),
-            ElevatedButton(onPressed: ()=>null, child: Text("a")),
+            Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  color: _containerColor,
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                ),
+                child:InkWell(
+                  onLongPress: () {
+                    setState(() {
+                      _containerColor = Colors.red;
+                    });
+                  },
+                  onTap: (){
+                    if(_containerColor == Colors.red){
+                      setState(() {
+                        _containerColor = Colors.blue;
+                      });
+                    }
+                  },
+                  child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                          margin: const EdgeInsets.only(left:10,right: 10),
+                          child: const Icon(Icons.call,size: 30,color: Colors.white,)
+                      ), // icon
+                      const Text(
+                        "Хабр",
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontFamily: 'MultiroundPro'
+                        ),
+                      ), // text
+                    ],
+                  ),
+                )
+            ),
+            Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  color: _containerColor,
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                ),
+                child:InkWell(
+                  onLongPress: () {
+                    setState(() {
+                      _containerColor = Colors.red;
+                    });
+                  },
+                  onTap: (){
+                    if(_containerColor == Colors.red){
+                      setState(() {
+                        _containerColor = Colors.blue;
+                      });
+                    }
+                  },
+                  child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                          margin: const EdgeInsets.only(left:10,right: 10),
+                          child: const Icon(Icons.call,size: 30,color: Colors.white,)
+                      ), // icon
+                      const Text(
+                        "Хабр",
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontFamily: 'MultiroundPro'
+                        ),
+                      ), // text
+                    ],
+                  ),
+                )
+            ),
           ],
         )
       ),

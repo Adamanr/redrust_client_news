@@ -1,6 +1,10 @@
 import 'package:GoodNews/src/models/auth_request.dart';
 import 'package:GoodNews/src/ui/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+
+import 'package:permission_handler/permission_handler.dart';
 
 class Auth extends StatefulWidget {
   @override
@@ -29,13 +33,7 @@ class _AuthFunc extends State<Auth> {
       debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                      'image/logo3.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+          color:Colors.white,
           child:Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -82,16 +80,15 @@ class _AuthFunc extends State<Auth> {
               ),
 
               Container(
+                height: 300,
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.white,
+                      color: Color.fromRGBO(168, 209, 231, 10),
                     ),
                     borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                    color: Colors.white
+                   color: Color.fromRGBO(168, 209, 231, 10),
                 ),
                 child: Column (
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
 
                     Container(
@@ -100,7 +97,7 @@ class _AuthFunc extends State<Auth> {
                       child: Text("Авторизация",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Color.fromRGBO(117,47,101, 100),
+                            color: Colors.white,
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'cunia'
@@ -118,16 +115,21 @@ class _AuthFunc extends State<Auth> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontSize: 20,
+                                  color: Colors.white,
                                   fontFamily: 'MultiroundPro'
                               ),
                             ),
                             //
                             TextField(
                               controller: emailController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: _selectedCard == 0 ? Colors.red : Colors.grey, width: 2.0),
+                                      color: Colors.grey, width: 2.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.grey, width: 2.0),
                                 ),
                                 hintText: "Почта",
                               ),
@@ -146,15 +148,20 @@ class _AuthFunc extends State<Auth> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   fontSize: 20,
+                                  color: Colors.white,
                                   fontFamily: 'MultiroundPro'
                               ),
                             ),
                             TextField(
                               controller: passwordController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: _selectedCard == 0 ? Colors.red : Colors.grey, width: 2.0),
+                                      color: Colors.grey, width: 2.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.grey, width: 2.0),
                                 ),
                                 hintText: "Пароль",
                               ),
@@ -163,7 +170,7 @@ class _AuthFunc extends State<Auth> {
                         )
                     ),
                     Container(
-                      margin: const EdgeInsets.only(top: 15, bottom: 10),
+                      margin: const EdgeInsets.only(top: 15),
                       width: 250,
                       child: Column(
                         children: [
@@ -187,7 +194,7 @@ class _AuthFunc extends State<Auth> {
                               });
                             },
                             style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(242, 52, 65, 100)),
+                                backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(247, 109, 109, 1)),
                                 shape: MaterialStateProperty.all(
                                     const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(Radius.circular(20))

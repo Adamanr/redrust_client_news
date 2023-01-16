@@ -1,7 +1,14 @@
+import 'dart:io';
+
 import 'package:GoodNews/src/models/reg_request.dart';
 import 'package:GoodNews/src/ui/HomePage.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter/widgets.dart';
+import 'package:http/http.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
 class Reg extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -41,44 +48,23 @@ class _RegWidget extends State<Reg> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             body: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                        'image/logo3.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+               color: Colors.white,
                 child:Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Row(
-                      children: [
-                        const SizedBox(width: 10),
-                        ElevatedButton(onPressed: (){
-                          Navigator.pushNamed(context, "/");
-                        },
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(242, 52, 65, 100)),
-                              shape: MaterialStateProperty.all(
-                                  const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(20))
-                                  )
-                              )
-                          ), child: const Icon(Icons.arrow_back),
-                        ),
-                      ],
-                    ),
+
                     Container(
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.white,
+                            color: Color.fromRGBO(168, 209, 231, 10),
                           ),
                           borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                          color: Colors.white
+                          color: Color.fromRGBO(168, 209, 231, 10),
                       ),
                       child: Column (
                         mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Center(
                             child: Container(
@@ -86,7 +72,7 @@ class _RegWidget extends State<Reg> {
                             child: const Text("Регистрация",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: Color.fromRGBO(186, 19, 51, 100),
+                                  color: Colors.white,
                                   fontSize:37,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'cunia'
@@ -107,6 +93,7 @@ class _RegWidget extends State<Reg> {
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           fontSize: 20,
+                                          color: Colors.white,
                                           fontFamily: 'MultiroundPro'
                                       ),
                                     ),
@@ -140,6 +127,7 @@ class _RegWidget extends State<Reg> {
                                     child: const Text("Пароль",
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
+                                          color: Colors.white,
                                           fontSize: 20,
                                           fontFamily: 'MultiroundPro'
                                       ),
@@ -175,6 +163,7 @@ class _RegWidget extends State<Reg> {
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           fontSize: 20,
+                                          color: Colors.white,
                                           fontFamily: 'MultiroundPro'
                                       ),
                                     ),
@@ -214,6 +203,8 @@ class _RegWidget extends State<Reg> {
                                         .then((value) =>
                                     {
                                       if (value) {
+
+                                        insertDog(emailController.text, passwordController.text),
                                         Navigator.pushReplacement(
                                             context,MaterialPageRoute(builder: (context) => HomePage())
                                         ),
@@ -231,7 +222,7 @@ class _RegWidget extends State<Reg> {
                                 }
                               },
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(242, 52, 65, 100)),
+                                  backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(247, 109, 109, 1)),
                                   shape: MaterialStateProperty.all(
                                       const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(Radius.circular(20))
@@ -257,4 +248,43 @@ class _RegWidget extends State<Reg> {
         )
     );
   }
+}
+
+class User {
+  final String email;
+  final String password;
+
+  const User({
+    required this.email,
+    required this.password,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+      'password': password,
+    };
+  }
+}
+
+Future<Database> getDB() async{
+
+  Directory? appDocDir = await getExternalStorageDirectory();
+  String? path = appDocDir?.path;
+
+  return openDatabase(
+      join(path!, 'session.db'),
+    version: 1,
+  );
+}
+Future<void> insertDog(email, password) async {
+  final db = await getDB();
+
+
+  var user = User(email: email, password: password);
+  await db.insert(
+    'user',
+    user.toMap(),
+    conflictAlgorithm: ConflictAlgorithm.replace,
+  );
 }

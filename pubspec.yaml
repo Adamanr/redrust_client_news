@@ -15,11 +15,10 @@ dependencies:
   path_provider:
   dio:
   permission_handler: ^9.2.0
-  sqflite:
-  path:
-
+  webfeed: 0.3.0
 
   cupertino_icons: ^1.0.2
+  sqflite: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +34,7 @@ flutter:
     - image/logo.jpg
     - image/logo2.jpg
     - image/logo3.jpg
+    - image/back.jpg
 
   fonts:
     - family: Broadway-Neon
