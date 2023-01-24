@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:GoodNews/src/ui/HomePage.dart';
 import 'package:GoodNews/src/ui/MainWindow.dart';
-import 'ui/auth.dart';
+import 'ui/Authentification/authPage.dart';
 import 'ui/reg.dart';
 
 class App extends StatelessWidget {

@@ -14,11 +14,12 @@ dependencies:
   http: ^0.13.5
   path_provider:
   dio:
+  webfeed:
   permission_handler: ^9.2.0
-  webfeed: 0.3.0
-
+  custom_switch: ^0.0.1
   cupertino_icons: ^1.0.2
   sqflite: ^2.2.3
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
@@ -27,14 +28,22 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 
+
+
 flutter:
   uses-material-design: true
 
+
   assets:
-    - image/logo.jpg
-    - image/logo2.jpg
     - image/logo3.jpg
     - image/back.jpg
+    - image/lenta.png
+    - image/habrLogo.png
+    - image/lenta_L.png
+    - image/logoNews.png
+    - image/logoNews1.png
+    - image/logoNews2.png
+    - image/dizzy.png
 
   fonts:
     - family: Broadway-Neon
@@ -70,4 +79,9 @@ flutter:
     - family: Los-Angeles-Deco
       fonts:
           - asset: fonts/Los-Angeles-Deco.ttf
-
+    - family: MyFlutterApp
+      fonts:
+          - asset: fonts/MyFlutterApp.ttf
+    - family: Nunito
+      fonts:
+        - asset: fonts/Nunito-Black.ttf

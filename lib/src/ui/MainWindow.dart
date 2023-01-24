@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:GoodNews/src/ui/auth.dart';
+import 'package:GoodNews/src/ui/Authentification/authPage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqflite.dart' as sql;
@@ -69,65 +69,66 @@ class _MainWindow extends State<MainWindow>{
   getDB();
     return Scaffold(
         body: Container(
-        color: Colors.white,
+        decoration: const BoxDecoration(
+          gradient: RadialGradient(
+            radius: 1.9,
+            center: Alignment.topLeft,
+            colors: [Color.fromRGBO(26, 24, 74, 10),Color.fromRGBO(21, 22, 42,10), Color.fromRGBO(73, 43, 69, 10)],
+            stops: [0.2,0.7,2.7]
+          ),
+        ),
         width: 400,
         height: 1300,
-          child: Column(
+          child: Center( child:Column(
             children: [
-              Container (
-              margin: EdgeInsets.only(top: 120),
-              child:const Text(
-                  "GoodNews",
-              style: TextStyle(
-                fontSize: 55,
-                fontFamily: 'Kunika',
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+              Container(
+                margin: EdgeInsets.only(top:100,left: 100, bottom: 100),
+                  alignment: Alignment.center,
+                  width: 250,
+                  child: Transform (
+                    transform: Matrix4.rotationZ(0.4),
+                    child: Image.asset("image/logoNews.png"),
+                  ),
               ),
+              RichText(
+                  textDirection: TextDirection.ltr,
+                  text: const TextSpan(
+                    style: TextStyle(fontSize: 50, fontFamily: 'Cunia'),
+                    children: <TextSpan>[
+                      TextSpan(text: "Good", style: TextStyle(color: Color.fromRGBO(243, 118, 130, 10))),
+                      TextSpan(text: "News", style: TextStyle(color: Color.fromRGBO(243, 184, 148, 10))),
+                    ],
+                  )
               ),
-              ),
-              Image.asset("image/back.jpg"),
               Container(
                 margin: const EdgeInsets.only(top: 80),
-                width: 260,
-                height: 55,
+                width: 292,
+                height: 67,
                 child: ElevatedButton(
                   onPressed: (){
                     Navigator.pushNamed(context, "/auth");
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor: MaterialStateProperty.all(Color.fromRGBO(28, 28, 62, 10)),
                     shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20))
+                        borderRadius: BorderRadius.all(Radius.circular(35))
                       )
                     )
                   ),
                   child: const Text("Авторизация",
                   style: TextStyle(
-                    color: Color.fromRGBO(247, 109, 109, 1),
-                    fontSize: 25,
-                    fontFamily: 'cunia',
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontFamily: 'Nunito',
                     fontWeight: FontWeight.bold,
                   ),
                   ),
                 ),
               ),
-              Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child:InkWell(
-                  child: const Text('Регистрация',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: 'cunia',
-                    color: Color.fromRGBO(36, 49, 94,1),
-                  ),),
-                  onTap: () => Navigator.pushNamed(context, "/reg")
-              )
-              )
             ],
           ),
-      )
+      ))
     );
   }
 }
