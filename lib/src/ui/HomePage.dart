@@ -1,7 +1,6 @@
 import 'package:GoodNews/src/ui/SelectPortal.dart';
 import 'package:GoodNews/src/blocks/Navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:webfeed/util/iterable.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,7 +22,6 @@ class NewsModel {
 }
 
 class _HomeWidget extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -32,12 +30,24 @@ class _HomeWidget extends State<HomePage> {
         appBar: AppBar(
           title: const Text("Новости"),
         ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Text("Hello"),
+              const Text("Hello"),
+
+              const Text("Hello"),
+              const Text("Hello"),
+            ],
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
           tooltip: 'Add', // used by assistive technologies
           onPressed: () async {
+            RssFeed decode;
             String lentaRSS = 'https://lenta.ru/rss/news';
             String habrRSS = 'https://habr.com/ru/rss/flows/develop/all/?fl=ru';
-            RssFeed decode;
             final lenta = await http.get(Uri.parse(lentaRSS));
             final habr = await http.get(Uri.parse(habrRSS));
             RegExp exp = RegExp(r'<[^>]*>|&[^>]*;|Читать далее');
@@ -56,7 +66,7 @@ class _HomeWidget extends State<HomePage> {
                 siteName: 'Lenta'
             )).toList());
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
         drawer: NavBar(),
         body: Column(
@@ -90,9 +100,9 @@ class _HomeWidget extends State<HomePage> {
                 future: fetchNews(),
                 builder: (context, snap) {
                   if (snap.hasData) {
-                    final List _news = snap.data;
-                    _news.shuffle();
-                    ImageIcon imgIcon = ImageIcon(AssetImage("image/lenta_L.png"),size: 50, color: Colors.black);
+                    final List news = snap.data;
+                    news.shuffle();
+                    ImageIcon imgIcon = const ImageIcon(AssetImage("image/lenta_L.png"),size: 50, color: Colors.black);
                     return ListView.builder(
                       scrollDirection: Axis.vertical,
 
@@ -100,30 +110,30 @@ class _HomeWidget extends State<HomePage> {
                       itemBuilder: (context, i) {
                         String textPortal = '';
                         String descPortal = '';
-                        final NewsModel _item = _news[i];
+                        final NewsModel _item = news[i];
                         switch (_item.siteName) {
                           case 'Habr':
                             textPortal = '${_item.title}\n';
                             descPortal = '${_item.description?.replaceFirst('    ', '')}\n';
-                            imgIcon = ImageIcon(AssetImage("image/habrLogo.png"),size: 50, color: Colors.blue);
+                            imgIcon = const ImageIcon(AssetImage("image/habrLogo.png"),size: 50, color: Colors.blue);
                             break;
                           case 'Lenta':
                             textPortal = '${_item.title}';
                             descPortal = '${_item.description?.replaceFirst('    ', '')}';
-                            imgIcon = ImageIcon(AssetImage("image/lenta_L.png"),size: 50, color: Colors.black);
+                            imgIcon = const ImageIcon(AssetImage("image/lenta_L.png"),size: 50, color: Colors.black);
                             break;
                         }
                         return Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: Column(
                           children: [
                             Row(
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(right: 10),
+                                  margin: const EdgeInsets.only(right: 10),
                                   child: imgIcon,
                                 ),
-                               Expanded(child: Text(textPortal, style: TextStyle(fontSize: 14, fontFamily: 'cunia')))
+                               Expanded(child: Text(textPortal, style: const TextStyle(fontSize: 14, fontFamily: 'cunia')))
                               ],
                             ),
                             Text(descPortal),
@@ -142,14 +152,14 @@ class _HomeWidget extends State<HomePage> {
                           )
                         );
                       },
-                      itemCount: _news.length,
+                      itemCount: news.length,
                     );
                   } else if (snap.hasError) {
                     return Center(
                       child: Text(snap.error.toString()),
                     );
                   } else {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -181,6 +191,7 @@ class _HomeWidget extends State<HomePage> {
 Future fetchNews() async {
   String lentaRSS = 'https://lenta.ru/rss/news';
   String habrRSS = 'https://habr.com/ru/rss/flows/develop/all/?fl=ru';
+
   RssFeed decode;
   final lenta = await http.get(Uri.parse(lentaRSS));
   final habr = await http.get(Uri.parse(habrRSS));

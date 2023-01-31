@@ -43,7 +43,6 @@ class _RegWidget extends State<Reg> {
 
   @override
   Widget build(BuildContext context){
-
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -53,7 +52,6 @@ class _RegWidget extends State<Reg> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-
                     Container(
                       decoration: BoxDecoration(
                           border: Border.all(

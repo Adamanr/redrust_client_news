@@ -1,9 +1,10 @@
-import 'package:GoodNews/src/models/auth_request.dart';
 import 'package:GoodNews/src/ui/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthPage extends StatefulWidget {
-  const AuthPage({super.key});
+  final PageController? controller;
+  const AuthPage({super.key, required this.controller});
 
   @override
   State<AuthPage> createState() {
@@ -12,8 +13,6 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthFunc extends State<AuthPage> {
-  int _selectedCard = -1;
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool sync = false;
@@ -27,10 +26,9 @@ class _AuthFunc extends State<AuthPage> {
   @override
   Widget build(BuildContext context){
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: Container(
+    return Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: Container(
           color:const Color.fromRGBO(22, 22, 50, 10),
           child:Column(
             children: [
@@ -110,7 +108,6 @@ class _AuthFunc extends State<AuthPage> {
                           labelStyle: const TextStyle(fontSize: 20, color: Colors.white),
                           focusColor: Colors.white,
                           hintStyle:  const TextStyle(fontSize: 20, color: Colors.white),
-
                           filled: true,
                           fillColor: const Color.fromRGBO(43,43, 71, 10),
                           enabledBorder: OutlineInputBorder(
@@ -128,8 +125,8 @@ class _AuthFunc extends State<AuthPage> {
               Row(
                 children: [
                   Container(
-                    width: 38,
-                    height: 38,
+                    width: 36,
+                    height: 36,
                     margin: const EdgeInsets.only(left: 20, bottom: 10, right: 5),
                     decoration: BoxDecoration(
                       color: Colors.black,
@@ -168,19 +165,20 @@ class _AuthFunc extends State<AuthPage> {
                 height:67,
                 child: ElevatedButton(
                   onPressed: () {
-                    authUser(
-                        emailController.text, passwordController.text)
-                        .then((value) => {
-                      if (value) {
-                        Navigator.pushReplacement(
-                            context,MaterialPageRoute(builder: (context) => const HomePage())
-                        ),
-                      }else{
-                        setState(() {
-                      _selectedCard = 0;
-                    }),
-                      }
-                    });
+                    context.go('/Home');
+                    // authUser(
+                    //     emailController.text, passwordController.text)
+                    //     .then((value) => {
+                    //   if (value) {
+                    //     Navigator.pushReplacement(
+                    //         context,MaterialPageRoute(builder: (context) => const HomePage())
+                    //     ),
+                    //   }else{
+                    //     setState(() {
+                    //   _selectedCard = 0;
+                    // }),
+                    //   }
+                    // });
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(34, 34, 87, 1)),
@@ -199,26 +197,14 @@ class _AuthFunc extends State<AuthPage> {
                     ),
                   ),
                ),
-            ),
+              ),
               Container(
                 width: 320,
                 height:67,
                 margin: const EdgeInsets.only(top:10),
                 child: ElevatedButton(
                   onPressed: () {
-                    authUser(
-                        emailController.text, passwordController.text)
-                        .then((value) => {
-                      if (value) {
-                        Navigator.pushReplacement(
-                            context,MaterialPageRoute(builder: (context) => const HomePage())
-                        ),
-                      }else{
-                        setState(() {
-                          _selectedCard = 0;
-                        }),
-                      }
-                    });
+                    widget.controller?.animateToPage(0, duration: Duration(seconds: 2), curve: Curves.easeInSine);
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.white),
@@ -237,11 +223,10 @@ class _AuthFunc extends State<AuthPage> {
                     ),
                   ),
                 ),
-              )
+            )
           ]
         ),
       )
-    )
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-
+import 'package:go_router/go_router.dart';
 
 Future<Database> getDB() async{
 
@@ -20,28 +20,16 @@ Future<Database> getDB() async{
   );
 }
 
-Future<String> getEmail() async {
-  final db = await getDB();
-
-
-
-  String result = (await db.rawQuery('SELECT email FROM user LIMITS 1', [1])) as String;
-  return result.toString();
-}
-
-
 class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-    String email = "";
-    getEmail().then((value) => email = value);
     return Drawer(
       child:ListView(
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
             accountName: Text('Oflutter.com'),
-            accountEmail: Text(email.toString()),
+            accountEmail: Text('A'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
@@ -63,11 +51,7 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.dashboard_sharp),
             title: Text('Новости'),
-            onTap: () => {
-            Navigator.pushReplacement(
-              context,MaterialPageRoute(builder: (context) => HomePage())
-            ),
-            }
+            onTap: () => context.go('/Home')
           ),
           ListTile(
             leading: Icon(Icons.person),
@@ -98,15 +82,15 @@ class NavBar extends StatelessWidget {
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.description),
-            title: Text('О приложении'),
-            onTap: () => null,
+            leading: const Icon(Icons.description),
+            title: const Text('О приложении'),
+            onTap: () => {},
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            title: Text('Выйти'),
-            leading: Icon(Icons.exit_to_app),
-            onTap: () => null,
+            title: const Text('Выйти'),
+            leading: const Icon(Icons.exit_to_app),
+            onTap: () => context.go('/')
           ),
         ],
       ),

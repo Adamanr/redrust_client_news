@@ -1,4 +1,3 @@
-import 'package:GoodNews/src/NewsIcon.dart';
 import 'package:GoodNews/src/blocks/Navbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 var prefs = SharedPreferences.getInstance();
 
 class SelectPortal extends StatefulWidget {
+  const SelectPortal({super.key});
+
   @override
   State<StatefulWidget> createState(){
     return _SelectPortalWidget();
@@ -16,20 +17,20 @@ class SelectPortal extends StatefulWidget {
 }
 
 class _SelectPortalWidget extends State<SelectPortal>{
-  var habrColor = Color.fromRGBO(217,222,226, 10);
-  var habrTextColor = Color.fromRGBO(170,189,204, 10);
-  var habrLogoColor = Color.fromRGBO(170,189,204, 10);
+  var habrColor = const Color.fromRGBO(217,222,226, 10);
+  var habrTextColor = const Color.fromRGBO(170,189,204, 10);
+  var habrLogoColor = const Color.fromRGBO(170,189,204, 10);
   var habrStatus = false;
 
 
-  var lentaColor = Color.fromRGBO(217,222,226, 10);
-  var lentaTextColor = Color.fromRGBO(170,189,204, 10);
-  var lentaLogoColor = Color.fromRGBO(170,189,204, 10);
+  var lentaColor = const Color.fromRGBO(217,222,226, 10);
+  var lentaTextColor = const Color.fromRGBO(170,189,204, 10);
+  var lentaLogoColor = const Color.fromRGBO(170,189,204, 10);
   var lentaStatus = false;
 
-  var _containerColor = Colors.blue;
+  final _containerColor = Colors.blue;
   bool status = false;
-  var statusColor = Color.fromRGBO(217,222,226, 10);
+  var statusColor = const Color.fromRGBO(217,222,226, 10);
 
   @override
   Widget build(BuildContext context){
@@ -37,14 +38,14 @@ class _SelectPortalWidget extends State<SelectPortal>{
       onWillPop: () async => false,
       child:Scaffold(
       appBar: AppBar(
-      title: Text("Выбор портала"),
+      title: const Text("Выбор портала"),
       ),
       drawer: NavBar(),
         body: ListView(
           padding: const EdgeInsets.all(5),
           children: [
             Container(
-              margin: EdgeInsets.only(bottom: 7, top: 11),
+              margin: const EdgeInsets.only(bottom: 7, top: 11),
               height: 60,
               decoration: BoxDecoration(
                   color: habrColor,
@@ -52,14 +53,14 @@ class _SelectPortalWidget extends State<SelectPortal>{
                     color: Colors.white,
                     width: 2,
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(20))
+                  borderRadius: const BorderRadius.all(Radius.circular(20))
               ),
               child: Flex(
                 direction: Axis.horizontal,
                 children: <Widget>[
                   Container(
                       margin: const EdgeInsets.only(left:10,right: 10),
-                      child: ImageIcon(AssetImage("image/habrLogo.png"),
+                      child: ImageIcon(const AssetImage("image/habrLogo.png"),
                           size: 45,
                           color: habrLogoColor),
                   ),
@@ -74,7 +75,6 @@ class _SelectPortalWidget extends State<SelectPortal>{
                       ),
                     ),
                   ),
-
                   Switch(
                     onChanged: (value) {
                       setState(() {
@@ -84,17 +84,17 @@ class _SelectPortalWidget extends State<SelectPortal>{
                           habrLogoColor = Colors.white;
                           habrTextColor = Colors.white;
                         }else{
-                          habrColor = Color.fromRGBO(217,222,226, 10);
-                          habrLogoColor = Color.fromRGBO(170,189,204, 10);
-                          habrTextColor = Color.fromRGBO(170,189,204, 10);
+                          habrColor = const Color.fromRGBO(217,222,226, 10);
+                          habrLogoColor = const Color.fromRGBO(170,189,204, 10);
+                          habrTextColor = const Color.fromRGBO(170,189,204, 10);
                         }
                       });
                     },
                     value: habrStatus,
                     activeColor: Colors.blue,
-                    activeTrackColor: Color.fromRGBO(140,199,243,10),
-                    inactiveThumbColor: Color.fromRGBO(217,222,226, 10),
-                    inactiveTrackColor: Color.fromRGBO(169,188,203,10),
+                    activeTrackColor: const Color.fromRGBO(140,199,243,10),
+                    inactiveThumbColor: const Color.fromRGBO(217,222,226, 10),
+                    inactiveTrackColor: const Color.fromRGBO(169,188,203,10),
                   )
                 ],
               ),
@@ -108,14 +108,14 @@ class _SelectPortalWidget extends State<SelectPortal>{
                     color: Colors.white,
                     width: 2,
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(20))
+                  borderRadius: const BorderRadius.all(Radius.circular(20))
               ),
               child: Flex(
                 direction: Axis.horizontal,
                 children: [
                   Container(
                       margin: const EdgeInsets.only(left:10,right: 10),
-                      child: ImageIcon(AssetImage("image/lenta.png"),
+                      child: ImageIcon(const AssetImage("image/lenta.png"),
                       size: 100,
                           color: lentaLogoColor),
                   ), // icon
