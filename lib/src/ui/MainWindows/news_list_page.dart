@@ -1,15 +1,15 @@
-import 'package:GoodNews/src/ui/SelectPortal.dart';
-import 'package:GoodNews/src/blocks/Navbar.dart';
+import 'package:good_news/src/ui/MainWindows/select_portal.dart';
+import 'package:good_news/src/blocks/navbar_block.dart';
 import 'package:flutter/material.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 import 'package:http/http.dart' as http;
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class NewListPage extends StatefulWidget {
+  const NewListPage({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _HomeWidget();
+    return _NewListWidget();
   }
 }
 
@@ -21,7 +21,7 @@ class NewsModel {
   NewsModel({required this.title, required this.description, required this.siteName});
 }
 
-class _HomeWidget extends State<HomePage> {
+class _NewListWidget extends State<NewListPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -33,27 +33,25 @@ class _HomeWidget extends State<HomePage> {
         bottomNavigationBar: BottomAppBar(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Text("Hello"),
-              const Text("Hello"),
-
-              const Text("Hello"),
-              const Text("Hello"),
+            children: const [
+              Text("Hello"),
+              Text("Hello"),
+              Text("Hello"),
+              Text("Hello"),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
           tooltip: 'Add', // used by assistive technologies
           onPressed: () async {
-            RssFeed decode;
             String lentaRSS = 'https://lenta.ru/rss/news';
             String habrRSS = 'https://habr.com/ru/rss/flows/develop/all/?fl=ru';
             final lenta = await http.get(Uri.parse(lentaRSS));
             final habr = await http.get(Uri.parse(habrRSS));
             RegExp exp = RegExp(r'<[^>]*>|&[^>]*;|Читать далее');
 
-            var decoded1 = RssFeed.parse(habr.body);
-            var habrDecoded = decoded1.items!.map((item) => NewsModel(
+            var decoded = RssFeed.parse(habr.body);
+            var habrDecoded = decoded.items!.map((item) => NewsModel(
                 title: item.title,
                 description: item.description?.replaceAll(exp, ''),
                 siteName: 'Habr'
@@ -68,7 +66,7 @@ class _HomeWidget extends State<HomePage> {
           },
           child: const Icon(Icons.add),
         ),
-        drawer: NavBar(),
+        drawer: const NavBar(),
         body: Column(
           children: <Widget> [
             SizedBox(
@@ -77,7 +75,7 @@ class _HomeWidget extends State<HomePage> {
               child: ElevatedButton(
                 onPressed: ()=> {
                   Navigator.pushReplacement(
-                      context,MaterialPageRoute(builder: (context) => SelectPortal())
+                      context,MaterialPageRoute(builder: (context) => const SelectPortal())
                   ),
                 },
                 style: ButtonStyle(
@@ -89,10 +87,10 @@ class _HomeWidget extends State<HomePage> {
                     )
                 ),
                 child: const Text("Выберите новостной портал",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontFamily: 'cunia'
-                )),
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'cunia'
+                    )),
               ),
             ),
             Expanded(
@@ -110,46 +108,46 @@ class _HomeWidget extends State<HomePage> {
                       itemBuilder: (context, i) {
                         String textPortal = '';
                         String descPortal = '';
-                        final NewsModel _item = news[i];
-                        switch (_item.siteName) {
+                        final NewsModel item = news[i];
+                        switch (item.siteName) {
                           case 'Habr':
-                            textPortal = '${_item.title}\n';
-                            descPortal = '${_item.description?.replaceFirst('    ', '')}\n';
+                            textPortal = '${item.title}\n';
+                            descPortal = '${item.description?.replaceFirst('    ', '')}\n';
                             imgIcon = const ImageIcon(AssetImage("image/habrLogo.png"),size: 50, color: Colors.blue);
                             break;
                           case 'Lenta':
-                            textPortal = '${_item.title}';
-                            descPortal = '${_item.description?.replaceFirst('    ', '')}';
+                            textPortal = '${item.title}';
+                            descPortal = '${item.description?.replaceFirst('    ', '')}';
                             imgIcon = const ImageIcon(AssetImage("image/lenta_L.png"),size: 50, color: Colors.black);
                             break;
                         }
                         return Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          children: [
-                            Row(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
                               children: [
-                                Container(
-                                  margin: const EdgeInsets.only(right: 10),
-                                  child: imgIcon,
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.only(right: 10),
+                                      child: imgIcon,
+                                    ),
+                                    Expanded(child: Text(textPortal, style: const TextStyle(fontSize: 14, fontFamily: 'cunia')))
+                                  ],
                                 ),
-                               Expanded(child: Text(textPortal, style: const TextStyle(fontSize: 14, fontFamily: 'cunia')))
+                                Text(descPortal),
+                                Container(
+                                  width: 100,
+                                  height: 2,
+                                  color: Colors.black,
+                                )
                               ],
-                            ),
-                            Text(descPortal),
-                            Container(
-                              width: 100,
-                              height: 2,
-                              color: Colors.black,
+                              // title:
+                              // subtitle: Text(
+                              //   '${_item.description}',
+                              //   maxLines: 4,
+                              //   overflow: TextOverflow.ellipsis,
+                              // ),
                             )
-                          ],
-                          // title:
-                          // subtitle: Text(
-                          //   '${_item.description}',
-                          //   maxLines: 4,
-                          //   overflow: TextOverflow.ellipsis,
-                          // ),
-                          )
                         );
                       },
                       itemCount: news.length,
@@ -191,24 +189,22 @@ class _HomeWidget extends State<HomePage> {
 Future fetchNews() async {
   String lentaRSS = 'https://lenta.ru/rss/news';
   String habrRSS = 'https://habr.com/ru/rss/flows/develop/all/?fl=ru';
-
-  RssFeed decode;
   final lenta = await http.get(Uri.parse(lentaRSS));
   final habr = await http.get(Uri.parse(habrRSS));
   RegExp exp = RegExp(r'<[^>]*>|&[^>]*;|Читать далее');
 
   var decoded1 = RssFeed.parse(habr.body);
   var habrDecoded = decoded1.items!.map((item) => NewsModel(
-    title: item.title,
-    description: item.description?.replaceAll(exp, ''),
-    siteName: 'Habr'
+      title: item.title,
+      description: item.description?.replaceAll(exp, ''),
+      siteName: 'Habr'
   )).toList();
-  
+
   var decoded2 = RssFeed.parse(lenta.body);
   habrDecoded.addAll(decoded2.items!.map((item) => NewsModel(
-    title: item.title,
-    description: item.description?.replaceAll(exp, ''),
-    siteName: 'Lenta'
+      title: item.title,
+      description: item.description?.replaceAll(exp, ''),
+      siteName: 'Lenta'
   )).toList());
   return habrDecoded;
 }

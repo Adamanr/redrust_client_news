@@ -1,24 +1,23 @@
-import 'dart:convert';
-
-import 'package:GoodNews/src/blocks/Navbar.dart';
+import 'package:good_news/src/blocks/navbar_block.dart';
 import 'package:flutter/material.dart';
 
-class profile extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _profileWidget();
+    return _ProfileWidget();
   }
 }
 
-class _profileWidget extends State<StatefulWidget>{
+class _ProfileWidget extends State<StatefulWidget>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text("Новости"),
+        title: const Text("Новости"),
       ),
-      drawer: NavBar(),
+      drawer: const NavBar(),
 
       body: Column(
         children: [
@@ -41,7 +40,7 @@ class _profileWidget extends State<StatefulWidget>{
                   margin: const EdgeInsets.only(left: 10),
                   child: Column(
                 //mainAxisSize: MainAxisAlignment.spaceAround,
-                children: <Widget>[
+                children: const <Widget>[
                   Text("Book Name"),
                   Text("Author name"),
                   Divider(

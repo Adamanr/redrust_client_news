@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -38,6 +36,6 @@ Future<bool> authUser(String email, String password) async {
 }
 extension BoolParsing on String {
   bool parseBool() {
-    return this.toLowerCase() == 'true';
+    return toLowerCase() == 'true';
   }
 }

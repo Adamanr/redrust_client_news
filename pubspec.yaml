@@ -1,4 +1,4 @@
-name: GoodNews
+name: good_news
 description: Приложение для чтения свежих новостей
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -21,6 +21,7 @@ dependencies:
   sqflite: ^2.2.3
   shared_preferences:
   go_router:
+  flutter_verification_code:
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +46,12 @@ flutter:
     - image/logoNews1.png
     - image/logoNews2.png
     - image/dizzy.png
+    - image/axolotl.png
+    - image/penguin.png
+    - image/walrus.png
+    - image/wildpig.png
+    - image/notification.png
+    - image/notification.jpg
 
   fonts:
     - family: Broadway-Neon

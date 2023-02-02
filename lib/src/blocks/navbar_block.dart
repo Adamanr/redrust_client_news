@@ -1,26 +1,10 @@
-import 'dart:io';
-
-import 'package:GoodNews/src/ui/profilePage.dart';
+import 'package:good_news/src/ui/MainWindows/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:GoodNews/src/ui/HomePage.dart';
-import 'package:flutter/widgets.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:go_router/go_router.dart';
 
-Future<Database> getDB() async{
-
-  Directory? appDocDir = await getExternalStorageDirectory();
-  String? path = appDocDir?.path;
-
-  return openDatabase(
-    join(path!, 'session.db'),
-    version: 1,
-  );
-}
-
 class NavBar extends StatelessWidget {
+  const NavBar({super.key});
+
   @override
   Widget build(BuildContext context){
     return Drawer(
@@ -28,8 +12,8 @@ class NavBar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('Oflutter.com'),
-            accountEmail: Text('A'),
+            accountName: const Text('Oflutter.com'),
+            accountEmail: const Text('A'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
@@ -40,7 +24,7 @@ class NavBar extends StatelessWidget {
                 ),
               ),
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.blue,
               image: DecorationImage(
                   fit: BoxFit.fill,
@@ -49,37 +33,37 @@ class NavBar extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.dashboard_sharp),
-            title: Text('Новости'),
+            leading: const Icon(Icons.dashboard_sharp),
+            title: const Text('Новости'),
             onTap: () => context.go('/Home')
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Авторы'),
-            onTap: () => null,
+            leading: const Icon(Icons.person),
+            title: const Text('Авторы'),
+            onTap: () => {},
           ),
           ListTile(
-            leading: Icon(Icons.group),
-            title: Text('Группы'),
-            onTap: () => null,
+            leading: const Icon(Icons.group),
+            title: const Text('Группы'),
+            onTap: () => {},
           ),
           ListTile(
-            leading: Icon(Icons.perm_identity),
-            title: Text('Профиль'),
+            leading: const Icon(Icons.perm_identity),
+            title: const Text('Профиль'),
             onTap: () => Navigator.pushReplacement(
-                context,MaterialPageRoute(builder: (context) => profile())
+                context,MaterialPageRoute(builder: (context) => const ProfilePage())
             ),
           ),
           ListTile(
-            leading: Icon(Icons.settings_accessibility_rounded),
-            title: Text('Агрегатор'),
-            onTap: ()=>null,
+            leading: const Icon(Icons.settings_accessibility_rounded),
+            title: const Text('Агрегатор'),
+            onTap: ()=> {},
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Настройки'),
-            onTap: () => null,
+            leading: const Icon(Icons.settings),
+            title: const Text('Настройки'),
+            onTap: () => {},
           ),
           ListTile(
             leading: const Icon(Icons.description),

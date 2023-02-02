@@ -1,9 +1,6 @@
-import 'package:GoodNews/src/blocks/Navbar.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:good_news/src/blocks/navbar_block.dart';
 import 'package:flutter/material.dart';
-import 'package:custom_switch/custom_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 var prefs = SharedPreferences.getInstance();
 
@@ -22,13 +19,11 @@ class _SelectPortalWidget extends State<SelectPortal>{
   var habrLogoColor = const Color.fromRGBO(170,189,204, 10);
   var habrStatus = false;
 
-
   var lentaColor = const Color.fromRGBO(217,222,226, 10);
   var lentaTextColor = const Color.fromRGBO(170,189,204, 10);
   var lentaLogoColor = const Color.fromRGBO(170,189,204, 10);
   var lentaStatus = false;
 
-  final _containerColor = Colors.blue;
   bool status = false;
   var statusColor = const Color.fromRGBO(217,222,226, 10);
 
@@ -38,9 +33,9 @@ class _SelectPortalWidget extends State<SelectPortal>{
       onWillPop: () async => false,
       child:Scaffold(
       appBar: AppBar(
-      title: const Text("Выбор портала"),
+        title: const Text("Выбор портала"),
       ),
-      drawer: NavBar(),
+      drawer: const NavBar(),
         body: ListView(
           padding: const EdgeInsets.all(5),
           children: [
@@ -48,22 +43,21 @@ class _SelectPortalWidget extends State<SelectPortal>{
               margin: const EdgeInsets.only(bottom: 7, top: 11),
               height: 60,
               decoration: BoxDecoration(
-                  color: habrColor,
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 2,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(20))
+                color: habrColor,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(20))
               ),
               child: Flex(
                 direction: Axis.horizontal,
                 children: <Widget>[
                   Container(
-                      margin: const EdgeInsets.only(left:10,right: 10),
-                      child: ImageIcon(const AssetImage("image/habrLogo.png"),
-                          size: 45,
-                          color: habrLogoColor),
-                  ),
+                    margin: const EdgeInsets.only(left:10,right: 10),
+                    child: ImageIcon(const AssetImage("image/habrLogo.png"),
+                      size: 45,
+                      color: habrLogoColor)),
                   Expanded(
                     flex: 1,
                     child: Text(
@@ -71,10 +65,7 @@ class _SelectPortalWidget extends State<SelectPortal>{
                       style: TextStyle(
                           fontSize: 30,
                           color: habrTextColor,
-                          fontFamily: 'MultiroundPro'
-                      ),
-                    ),
-                  ),
+                          fontFamily: 'MultiroundPro'))),
                   Switch(
                     onChanged: (value) {
                       setState(() {
@@ -87,8 +78,7 @@ class _SelectPortalWidget extends State<SelectPortal>{
                           habrColor = const Color.fromRGBO(217,222,226, 10);
                           habrLogoColor = const Color.fromRGBO(170,189,204, 10);
                           habrTextColor = const Color.fromRGBO(170,189,204, 10);
-                        }
-                      });
+                        }});
                     },
                     value: habrStatus,
                     activeColor: Colors.blue,
@@ -96,9 +86,7 @@ class _SelectPortalWidget extends State<SelectPortal>{
                     inactiveThumbColor: const Color.fromRGBO(217,222,226, 10),
                     inactiveTrackColor: const Color.fromRGBO(169,188,203,10),
                   )
-                ],
-              ),
-            ),
+                ])),
             Container(
               margin: const EdgeInsets.only(bottom: 7),
               height: 60,
@@ -108,8 +96,7 @@ class _SelectPortalWidget extends State<SelectPortal>{
                     color: Colors.white,
                     width: 2,
                   ),
-                  borderRadius: const BorderRadius.all(Radius.circular(20))
-              ),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
               child: Flex(
                 direction: Axis.horizontal,
                 children: [
@@ -127,10 +114,7 @@ class _SelectPortalWidget extends State<SelectPortal>{
                           fontSize: 23.52,
                           color: lentaTextColor,
                           fontFamily: 'MultiroundPro',
-                      ),
-                    ),
-                  ),
-
+                      ))),
                   Switch(
                     onChanged: (value) {
                       setState(() {
@@ -140,23 +124,21 @@ class _SelectPortalWidget extends State<SelectPortal>{
                           lentaLogoColor = Colors.white;
                           lentaTextColor = Colors.white;
                         }else{
-                          lentaColor = Color.fromRGBO(217,222,226, 10);
-                          lentaLogoColor = Color.fromRGBO(170,189,204, 10);
-                          lentaTextColor = Color.fromRGBO(170,189,204, 10);
+                          lentaColor = const Color.fromRGBO(217,222,226, 10);
+                          lentaLogoColor = const Color.fromRGBO(170,189,204, 10);
+                          lentaTextColor = const Color.fromRGBO(170,189,204, 10);
                         }
                       });
                     },
                     value: lentaStatus,
                     activeColor: Colors.blue,
-                    activeTrackColor: Color.fromRGBO(140,199,243,10),
-                    inactiveThumbColor: Color.fromRGBO(217,222,226, 10),
-                    inactiveTrackColor: Color.fromRGBO(169,188,203,10),
+                    activeTrackColor: const Color.fromRGBO(140,199,243,10),
+                    inactiveThumbColor: const Color.fromRGBO(217,222,226, 10),
+                    inactiveTrackColor: const Color.fromRGBO(169,188,203,10),
                   )
-                ],
-              ),
-            ),
+                ])),
             Container(
-              margin: EdgeInsets.only(bottom: 7),
+              margin: const EdgeInsets.only(bottom: 7),
               height: 60,
               decoration: BoxDecoration(
                   color: statusColor,
@@ -164,8 +146,7 @@ class _SelectPortalWidget extends State<SelectPortal>{
                     color: Colors.white,
                     width: 2,
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(20))
-              ),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
               child: Flex(
                 direction: Axis.horizontal,
                 children: <Widget>[
@@ -181,29 +162,26 @@ class _SelectPortalWidget extends State<SelectPortal>{
                           fontSize: 30,
                           color: Colors.white,
                           fontFamily: 'MultiroundPro'
-                      ),
-                    ),
-                  ),
-
+                      ))),
                   Switch(
                     onChanged: (value) {
                       setState(() {
                         status = value;
                         if (status){
-                          statusColor = Color.fromRGBO(208,227,242, 10);
+                          statusColor = const Color.fromRGBO(208,227,242, 10);
                         }else{
-                          statusColor = Color.fromRGBO(217,222,226, 10);
+                          statusColor = const Color.fromRGBO(217,222,226, 10);
                         }
                       });
                     },
                     value: status,
                     activeColor: Colors.blue,
-                    activeTrackColor: Color.fromRGBO(140,199,243,10),
-                    inactiveThumbColor: Color.fromRGBO(217,222,226, 10),
-                    inactiveTrackColor: Color.fromRGBO(169,188,203,10),
+                    activeTrackColor: const Color.fromRGBO(140,199,243,10),
+                    inactiveThumbColor: const Color.fromRGBO(217,222,226, 10),
+                    inactiveTrackColor: const Color.fromRGBO(169,188,203,10),
                   )
-                ],
-              ),
+                ]
+              )
             ),
           ],
         )
