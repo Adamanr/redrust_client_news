@@ -154,12 +154,22 @@ class _EmailPasswordPage extends State<EmailPasswordPage> {
                           })
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(bottom: 10, left: 10),
-                  child: const Text(
-                    "Запомнить в системе",
-                    style: TextStyle(fontSize: 25, color: Colors.white, fontFamily: 'Nunito'),
-                  ),
+                Padding(padding: EdgeInsets.only(bottom: 10, left: 10),
+                    child: InkWell(
+                      onTap: (){
+                        setState(() {
+                          if(sync){
+                            sync = false;
+                          }else{
+                            sync = true;
+                          }
+                        });
+                      },
+                      child:Text(
+                        "Запомнить в системе",
+                        style: TextStyle(fontSize: 25, color: Colors.white, fontFamily: 'Nunito'),
+                      ),
+                    ),
                 )
               ],
             ),
