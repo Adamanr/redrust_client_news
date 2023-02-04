@@ -165,7 +165,7 @@ class _EmailPasswordPage extends State<EmailPasswordPage> {
                           }
                         });
                       },
-                      child:Text(
+                      child:const Text(
                         "Запомнить в системе",
                         style: TextStyle(fontSize: 25, color: Colors.white, fontFamily: 'Nunito'),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AvatarPage extends StatefulWidget {
   PageController? controller;
@@ -87,7 +88,7 @@ class _AvatarWidget extends State<AvatarPage>{
               height:67,
               child: ElevatedButton(
                 onPressed: () {
-                  widget.controller?.animateToPage(1, duration: const Duration(seconds: 1), curve: Curves.easeInSine);
+                  context.go('/Main');
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(34, 34, 87, 1)),

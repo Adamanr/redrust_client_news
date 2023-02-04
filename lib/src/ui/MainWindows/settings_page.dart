@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:good_news/src/blocks/navbar_bottom.dart';
 
-class GroupPage extends StatefulWidget{
-  GroupPage({super.key});
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
 
   @override
-  State<StatefulWidget> createState() {
-    return _GroupWidget();
+  State<SettingsPage> createState() {
+    return _SettingsWidget();
   }
 }
 
-class _GroupWidget extends State<GroupPage>{
-
+class _SettingsWidget extends State<SettingsPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: bottomNavbar(context),
       body: Column(
-        children: const [
+        children: [
 
         ],
       ),

@@ -1,11 +1,14 @@
+
 import 'package:good_news/src/ui/Authentication//Authorization%20/auth_controller.dart';
 import 'package:good_news/src/ui/Authentication/Registration/register_controller.dart';
 import 'package:good_news/src/ui/Authentication/select_page.dart';
+import 'package:good_news/src/ui/MainWindows/find_page.dart';
+import 'package:good_news/src/ui/MainWindows/group_page.dart';
 import 'package:good_news/src/ui/MainWindows/home_page.dart';
-import 'package:good_news/src/ui/Authentication/Registration/email_page.dart';
 import "package:flutter/material.dart";
 import 'package:good_news/src/ui/MainWindows/news_list_page.dart';
 import 'package:good_news/src/ui/MainWindows/profile_page.dart';
+import 'package:good_news/src/ui/MainWindows/settings_page.dart';
 import 'package:good_news/src/ui/main_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,17 +39,33 @@ GoRouter _route = GoRouter(
     GoRoute(
       path: '/Reg',
       builder: (context, state) =>  const RegistrationController(controller: null)),
-    GoRoute(
-      path: '/News',
-      builder: (context, state) => const NewListPage()),
+
     GoRoute(
         path: '/Profile',
         builder: (context, state) => const ProfilePage()),
     GoRoute(
-        path: '/Home',
-        builder: (context, state) => const HomePage()),
-    GoRoute(
       path: '/Select',
-      builder: (context, state) => const SelectPage())
+      builder: (context, state) => const SelectPage()),
+    GoRoute(
+        path: '/Notification',
+        builder: (context, state) => HomePage()),
+
+    GoRoute(
+        path: '/News',
+        builder: (context, state) =>  const NewListPage()),
+    GoRoute(
+        path: '/Find',
+        builder: (context, state) => FindPage()),
+    GoRoute(
+        path: '/Main',
+        builder: (context, state) => HomePage()),
+    GoRoute(
+        path: '/Settings',
+        builder: (context, state) => const SettingsPage()),
+    GoRoute(
+        path: '/Group',
+        builder: (context, state) => GroupPage()),
+
+
   ]
 );

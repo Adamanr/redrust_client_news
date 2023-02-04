@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:good_news/src/blocks/navbar_block.dart';
+import 'package:good_news/src/blocks/navbar_bottom.dart';
 
 class HomePage extends StatefulWidget{
-  const HomePage({super.key});
+  HomePage({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -10,10 +11,13 @@ class HomePage extends StatefulWidget{
   }
 }
 
+const List<String> users = <String>["Tom", "Alice", "Bob", "Sam", "Kate"];
 class _HomeWidget extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
       drawer: const NavBar(),
       backgroundColor: const Color.fromRGBO(22, 22, 50, 10),
       appBar: AppBar(
@@ -44,32 +48,7 @@ class _HomeWidget extends State<HomePage>{
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 70,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(topRight: Radius.circular(30),topLeft:Radius.circular(30)),
-          color: Color.fromRGBO(40, 43, 75, 10),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(onPressed: (){}, icon: const ImageIcon(AssetImage('image/news.png'),color: Colors.white, size: 35)),
-            IconButton(onPressed: (){}, icon: const ImageIcon(AssetImage('image/find.png'),color: Colors.white , size: 35)),
-            Container(
-              decoration: BoxDecoration(
-                  color: const Color.fromRGBO(255, 0, 204, 10),
-                  border: Border.all(
-                    color: const Color.fromRGBO(255, 0, 204, 10),
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(20))
-              ),
-              child: IconButton(onPressed: (){}, icon: const Icon(Icons.home, color: Colors.white, size:40)),
-            ),
-            IconButton(onPressed: (){}, icon: const ImageIcon(AssetImage('image/group.png'),color: Colors.white , size: 35)),
-            IconButton(onPressed: (){}, icon: const ImageIcon(AssetImage('image/settings.png'),color: Colors.white , size: 35))
-          ],
-        ),
-      ),
+      bottomNavigationBar: bottomNavbar(context),
       body: Column(
         children: [
           Container(
@@ -112,7 +91,7 @@ class _HomeWidget extends State<HomePage>{
            child: Container(
                margin: const EdgeInsets.only(left: 15, right: 15),
                height: 50,
-               padding: EdgeInsets.only(left: 25),
+               padding: const EdgeInsets.only(left: 25),
                width:400,
                decoration: BoxDecoration(
                    color: Colors.white,
@@ -131,12 +110,12 @@ class _HomeWidget extends State<HomePage>{
                )
            ),
           ),
-          Padding(padding: EdgeInsets.only(left: 15,right: 15),
+          Padding(padding: const EdgeInsets.only(left: 15,right: 15),
           child:Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Row(
               children: [
-                Container(
+                SizedBox(
                   width: 160,
                   child: ElevatedButton.icon(
                     onPressed: () {},
@@ -146,7 +125,7 @@ class _HomeWidget extends State<HomePage>{
                       color: Colors.white
                     ),
                     label: const Text('Создать', style: TextStyle(fontSize: 20, fontFamily: 'Nunito', color: Colors.white)), // <-- Text
-                    style: ElevatedButton.styleFrom(backgroundColor:Color.fromRGBO(50, 50, 153, 10),),
+                    style: ElevatedButton.styleFrom(backgroundColor:const Color.fromRGBO(50, 50, 153, 10),),
                   ),
                 ),
                 Container(
@@ -155,15 +134,34 @@ class _HomeWidget extends State<HomePage>{
                   child: ElevatedButton.icon(
                     onPressed: () {},
                     icon: const ImageIcon(AssetImage("image/group.png")),
-                    label: Text('Группы', style: TextStyle(fontSize: 20, fontFamily: 'Nunito')), // <-- Text
+                    label: const Text('Группы', style: TextStyle(fontSize: 20, fontFamily: 'Nunito')), // <-- Text
                   ),
                 )
               ],
             ),
           )
-          )
+          ),
+          Container(
+            margin: const EdgeInsets.only(top:53.5),
+            height: 370,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(topRight: Radius.circular(30),topLeft:Radius.circular(30)),
+              color: Color.fromRGBO(31, 36, 72, 10),
+            ),
+            alignment: FractionalOffset.bottomCenter,
+            child: ListView.builder(
+                itemCount: 4,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    padding: const EdgeInsets.only(left:20,top: 20),
+                      child: Text("$index ${users[index]}", style: const TextStyle(fontSize:30, fontFamily: 'Nunito', color: Colors.white))
+                  );
+                }),
+          ),
+
         ],
       ),
+    )
     );
   }
 }

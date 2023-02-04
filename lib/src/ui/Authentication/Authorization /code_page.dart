@@ -53,7 +53,7 @@ class _CodePage extends State<CodePage>{
             height:67,
             child: ElevatedButton(
               onPressed: () {
-                context.go('/Home');
+                context.go('/Main');
               },
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(34, 34, 87, 1)),
