@@ -1,4 +1,5 @@
 
+import 'package:good_news/src/models/Enitity/NewsModel.dart';
 import 'package:good_news/src/ui/Authentication//Authorization%20/auth_controller.dart';
 import 'package:good_news/src/ui/Authentication/Registration/register_controller.dart';
 import 'package:good_news/src/ui/Authentication/select_page.dart';
@@ -7,6 +8,7 @@ import 'package:good_news/src/ui/MainWindows/group_page.dart';
 import 'package:good_news/src/ui/MainWindows/home_page.dart';
 import "package:flutter/material.dart";
 import 'package:good_news/src/ui/MainWindows/news_list_page.dart';
+import 'package:good_news/src/ui/MainWindows/only_news_page.dart';
 import 'package:good_news/src/ui/MainWindows/profile_page.dart';
 import 'package:good_news/src/ui/MainWindows/settings_page.dart';
 import 'package:good_news/src/ui/main_page.dart';
@@ -49,6 +51,13 @@ GoRouter _route = GoRouter(
     GoRoute(
         path: '/Notification',
         builder: (context, state) => HomePage()),
+    GoRoute(
+      name:'onlyNews',
+        path: '/onlyNews/:title/:descriptions/:icons/:siteName',
+        builder: (context, state) => OnlyNewsPage(
+            title: state.params['title'], descriptions: state.params['descriptions'], icons: state.params['icons'], siteName: state.params['siteName'],body: state.params['body']
+        )),
+
 
     GoRoute(
         path: '/News',

@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:good_news/src/blocks/navbar_bottom.dart';
 import 'package:good_news/src/models/Enitity/NewsModel.dart';
 import 'package:good_news/src/models/get_news_portals.dart';
@@ -40,33 +41,10 @@ class _NewListWidget extends State<NewListPage> {
           ),
           child:Column(
           children: <Widget> [
-            SizedBox(
-              height: 40,
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: ()=> {
-                  Navigator.pushReplacement(
-                      context,MaterialPageRoute(builder: (context) => const SelectPortal())
-                  ),
-                },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(242, 52, 65, 100)),
-                    shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(0))
-                        )
-                    )
-                ),
-                child: const Text("Выберите новостной портал",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: 'cunia'
-                    )),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top:10, left:15, right: 15),
-              child: FutureBuilder(
+            Expanded(
+              child:Container(
+                margin: const EdgeInsets.only(left: 15,right: 15),
+                child: FutureBuilder(
                 future: getNews(),
                 builder: (context, snap) {
                   if (snap.hasData) {
@@ -78,9 +56,19 @@ class _NewListWidget extends State<NewListPage> {
                       shrinkWrap: true,
                       itemBuilder: (context, i) {
                         final NewsModel item = news[i];
-                        return Container(
+                        return InkWell(
+                          onTap: (){
+                            context.goNamed('onlyNews',params: {"title":item.title,'descriptions':item.description,'icons':item.icons.toString(), 'siteName':item.siteName});
+                          },
+                            child:Container(
+                            decoration: BoxDecoration(
+                                color: const Color.fromRGBO(37, 41, 70, 10  ),
+                                border: Border.all(
+                                  color: const Color.fromRGBO(255, 0, 204, 10),
+                                ),
+                                borderRadius: const BorderRadius.all(Radius.circular(20))
+                            ),
                           margin: const EdgeInsets.only(bottom: 20),
-                          color: const Color.fromRGBO(37, 41, 70, 10  ),
                             padding: const EdgeInsets.all(10),
                             child: Column(
                               children: [
@@ -97,13 +85,14 @@ class _NewListWidget extends State<NewListPage> {
                                 Text(item.description.toString(), style: const TextStyle(color: Colors.white)),
                               ],
                             )
+                        )
                         );
                       },
                       itemCount: news.length,
                     );
                   } else if (snap.hasError) {
                     return Center(
-                      child: Text(snap.error.toString()),
+                      child: Text(snap.error.toString(), style: TextStyle(color: Colors.white, fontSize: 25, fontFamily: 'Nunito'),),
                     );
                   } else {
                     return const Center(
@@ -112,6 +101,7 @@ class _NewListWidget extends State<NewListPage> {
                   }
                 },
               ),
+            )
             )
           ],
         ),

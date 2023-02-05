@@ -8,23 +8,36 @@ Future getNews() async {
   String habrRSS = 'https://habr.com/ru/rss/flows/develop/all/?fl=ru';
   final lenta = await http.get(Uri.parse(lentaRSS));
   final habr = await http.get(Uri.parse(habrRSS));
-  RegExp exp = RegExp(r'<[^>]*>|&[^>]*;|Читать далее|\n');
 
   var decoded1 = RssFeed.parse(habr.body);
   var newsList = decoded1.items!.map((item) => NewsModel(
+      body: item.content!.value.toString(),
       title: '${item.title}\n',
-      description: item.description?.replaceAll(exp, '').replaceFirst('    ', ''),
+      description: checkAndTruncateString(item.description!),
       siteName: 'Habr',
       icons: const ImageIcon(AssetImage("image/habrLogo.png"),size: 50, color: Colors.blue),
   )).toList();
 
   var decoded2 = RssFeed.parse(lenta.body);
   newsList.addAll(decoded2.items!.map((item) => NewsModel(
-    title: item.title,
-      description: item.description?.replaceAll(exp, '').replaceFirst('    ', ''),
+    title: item.title!,
+    body: item.content!.value.toString(),
+    description: checkAndTruncateString(item.description!),
       siteName: 'Lenta',
       icons: const ImageIcon(AssetImage("image/lenta_L.png"),size: 50, color: Colors.black),
   )).toList());
 
   return newsList;
+}
+String checkAndTruncateString(String? input) {
+  RegExp exp = RegExp(r'<[^>]*>|&[^>]*;|Читать далее|\n');
+
+  if (input != null){
+    if(input.length <= 150) {
+      return input.replaceAll(exp, '').replaceFirst('    ', '');
+    } else {
+      return "${input.substring(0,150).replaceAll(exp, '').replaceFirst('    ', '')}...";
+    }
+  }
+  return "";
 }
